@@ -1,0 +1,1 @@
+django graphql install : pip3 install graphene-django
