@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'graphene_django',
     'myapp',
 ]
+GRAPHENE = {
+    'SCHEMA': 'myapp.schema.schema'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
