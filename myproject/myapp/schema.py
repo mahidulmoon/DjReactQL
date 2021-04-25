@@ -7,7 +7,7 @@ class UserType(DjangoObjectType):
         model = UserModel
 
 
-        
+#query part        
 class Query(graphene.ObjectType):
     users = graphene.List(UserType)
 
@@ -15,4 +15,28 @@ class Query(graphene.ObjectType):
         return UserModel.objects.all()
 
 
-schema = graphene.Schema(query=Query)
+#mutation part
+class CreateUser(graphene.Mutation):
+    id = graphene.Int()
+    first_name = graphene.String()
+    last_name = graphene.String()
+
+    class Arguments:
+        first_name = graphene.String()
+        last_name = graphene.String()
+
+    def mutate(self, info, first_name, last_name):
+        user = UserModel(first_name=first_name, last_name=last_name)
+        user.save()
+
+        return CreateUser(
+            id=user.id,
+            first_name=user.first_name,
+            last_name=user.last_name,
+        )
+
+class Mutation(graphene.ObjectType):
+    create_user = CreateUser.Field()
+
+
+schema = graphene.Schema(query=Query,mutation=Mutation)
