@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { useQuery } from 'react-apollo';
-import { gql } from 'apollo-boost';const QUERY_USERS = gql`
+import { gql } from 'apollo-boost';
+const QUERY_USERS = gql`
   query {
     users {
       id
